@@ -7,9 +7,9 @@
 # clear out all old objects etc to avoid confusion
 rm(list = ls()) 
 
-# Loading the data: Ensure R is in the right working directory 
-ind <- read.csv("../data/CakeMap/ind.csv")
-cons <- read.csv("../data/CakeMap/cons.csv")
+# Loading the data: Ensure R is in the right working directory (spatial-microsim-book)
+ind <- read.csv("data/CakeMap/ind.csv")
+cons <- read.csv("data/CakeMap/cons.csv")
 
 # Take a quick look at the data
 head(ind)
@@ -23,7 +23,7 @@ con3 <- cons[15:24] # socio-economic class
 cat_labs <- names(cons) # category names, from correct from cons.R
 
 # set-up aggregate values - column for each category
-source("../data/CakeMap/categorise.R") # this script must be customised to input data
+source("data/CakeMap/categorise.R") # this script must be customised to input data
 
 # check constraint totals - should be true
 sum(ind_cat[,1:ncol(con1)]) == nrow(ind) # is the number in each category correct?
@@ -106,7 +106,7 @@ nrow(final_micro)
 
 # now let's add the geonames
 # get geo names
-geonames <- read.csv("../data/CakeMap/cars-raw.csv")
+geonames <- read.csv("data/CakeMap/cars-raw.csv")
 geonames_df <- as.data.frame(geonames[3:126,2])
 # create a zoneid
 geonames_df$zone <- 1:nrow(geonames_df)
@@ -139,6 +139,6 @@ weighted.mean(final_micro_geo$NSSEC8n, w = final_micro_geo$weight, na.rm = TRUE)
 aggregate(final_micro_geo$NSSEC8n, by= list(final_micro_geo$zone), FUN = weighted.mean, w = final_micro_geo$weight, na.rm = TRUE)
 
 # so for now, let's save the file out and do the stats in STATA!!
-write.csv(final_micro_geo, file = "final_micro_fractional_cakes_geo.csv", na = ".")
+write.csv(final_micro_geo, file = "fractional_weights/final_micro_fractional_cakes_geo.csv", na = ".")
 
 # done!
