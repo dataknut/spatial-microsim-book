@@ -141,8 +141,4 @@ aggregate(final_micro_geo$NSSEC8n, by= list(final_micro_geo$zone), FUN = weighte
 # so for now, let's save the file out and do the stats in STATA!!
 write.csv(final_micro_geo, file = "final_micro_fractional_cakes_geo.csv", na = ".")
 
-# now read the summary of cakes by zone (created in STATA) back in
-cakes_by_zone <- read.csv("cakes_geo.csv")
-
-# and do the R mapping thing...
-# to do
+# done!
